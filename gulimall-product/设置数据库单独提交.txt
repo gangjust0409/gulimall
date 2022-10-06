@@ -1,0 +1,14 @@
+# 将当前的会话，隔离级别等级设置独位提交
+set SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+
+select * from pms_spu_images;
+
+select * from pms_spu_info;
+
+SELECT * FROM pms_spu_info_desc;
+
+select * from pms_sku_info;
+
+select * from pms_sku_images;
+
+

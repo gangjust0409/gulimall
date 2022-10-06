@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bdqn.gulimall.product.dao.SkuSaleAttrValueDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cn.bdqn.gulimall.product.entity.SkuSaleAttrValueEntity" id="skuSaleAttrValueMap">
+        <result property="id" column="id"/>
+        <result property="skuId" column="sku_id"/>
+        <result property="attrId" column="attr_id"/>
+        <result property="attrName" column="attr_name"/>
+        <result property="attrValue" column="attr_value"/>
+        <result property="attrSort" column="attr_sort"/>
+    </resultMap>
+    <resultMap id="SkuItemAttrVo" type="cn.bdqn.gulimall.product.vo.SkuItemAttrVo">
+        <result column="attr_id" property="attrId"/>
+        <result column="attr_name" property="attrName"/>
+        <collection property="attrValue" ofType="cn.bdqn.gulimall.product.vo.AttrSkuWithIdVo">
+            <result column="attr_value" property="attrValue"/>
+            <result column="sku_ids" property="attrIds"/>
+        </collection>
+    </resultMap>
+    <!--将查询到的值拼接在一起 （group_concat），去重（distinct）-->
+    <select id="getSaleAttrValue" resultMap="SkuItemAttrVo">
+        select
+            ssav.attr_id attr_id,
+            ssav.attr_name attr_name,
+            ssav.attr_value as attr_value,
+            group_concat(si.sku_id) as sku_ids
+        from pms_sku_info as si
+        left join pms_sku_sale_attr_value as ssav on ssav.sku_id = si.sku_id
+        where si.spu_id = #{spuId}
+        group by ssav.attr_id,ssav.attr_name,ssav.attr_value
+
+    </select>
+
+
+</mapper>

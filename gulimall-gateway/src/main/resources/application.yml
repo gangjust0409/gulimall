@@ -1,0 +1,71 @@
+server:
+  port: 88
+# 应用名称
+spring:
+  application:
+    name: gulimall-gateway
+# 配置 网关
+  cloud:
+    gateway:
+      # 配置路由
+      routes:
+        # 优先级顺序： 精确的路由放在最高级，模糊的路由放到最低级
+
+        - id: product_route
+          # 匹配成功后跳转到哪
+          uri: lb://gulimall-product
+          # 设置断言
+          predicates:
+            - Path=/api/product/**
+            # 路径重写  http://localhost:88/api/**  http://localhost:80001/**
+          filters:
+            - RewritePath=/api/?(?<segment>.*),/$\{segment}
+
+        - id: thridPaty-route
+          uri: lb://gulimall-third-paty
+          predicates:
+            - Path=/api/thirdparty/**
+            # 路径重写  http://localhost:88/api/**  http://localhost:80001/**
+          filters:
+            - RewritePath=/api/?(?<segment>.*),/$\{segment}
+
+        - id: member-route
+          uri: lb://gulimall-member
+          predicates:
+            - Path=/api/member/**
+              # 路径重写  http://localhost:88/api/**  http://localhost:80001/**
+          filters:
+            - RewritePath=/api/?(?<segment>.*),/$\{segment}
+
+        - id: ware-route
+          uri: lb://gulimall-ware
+          predicates:
+            - Path=/api/ware/**
+              # 路径重写  http://localhost:88/api/**  http://localhost:80001/**
+          filters:
+            - RewritePath=/api/?(?<segment>.*),/$\{segment}
+
+        - id: admin_route
+          uri: lb://renren-fast
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api/?(?<segment>.*),/renren-fast/$\{segment}
+
+        # 配置域名的，放在最后，不然，只可以访问页面，不能访问 api 接口
+        - id: gulimall_host_route
+          uri: lb://gulimall-product
+          predicates:
+            - Host=gulimall.mmf.asia,item.gulimall.mmf.asia
+
+        - id: gulimall_search_route
+          uri: lb://gulimall-search
+          predicates:
+            - Host=search.gulimall.mmf.asia
+
+
+
+            # 注册进naocs
+    nacos:
+      discovery:
+        server-addr: localhost:8848

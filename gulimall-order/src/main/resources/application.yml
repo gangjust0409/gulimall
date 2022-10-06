@@ -1,0 +1,36 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: gulimall-order
+  datasource:
+    url: jdbc:mysql://localhost:3306/gulimall_oms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-value: 0   # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 1  # 逻辑未删除值(默认为 0)
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
+
+
+
+
+# debug 打印日志
+#logging:
+#  level:
+#    cn.bdqn.gulimall.product.dao: debug
+# oss 存储

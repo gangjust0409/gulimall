@@ -1,0 +1,14 @@
+
+o
+java:S2293P"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÃÉ®›
+Z
+java:S1854="?Remove this useless assignment to local variable "callbackUrl".(ÎğÃÖúÿÿÿÿ
+K
+java:S1481="0Remove this unused "callbackUrl" local variable.(ÎğÃÖúÿÿÿÿ
+T
+java:S4719L"9Replace charset name argument with StandardCharsets.UTF_8(‹á±Õÿÿÿÿÿ
+V	java:S125Z"<This block of commented-out lines of code should be removed.(¦Ğˆøúÿÿÿÿ
+S	java:S106^"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ
+V	java:S125]"<This block of commented-out lines of code should be removed.(èˆ£Ôşÿÿÿÿ
+b
+java:S1128"LRemove this unused import 'jdk.nashorn.internal.objects.annotations.Getter'.(éÌ’«

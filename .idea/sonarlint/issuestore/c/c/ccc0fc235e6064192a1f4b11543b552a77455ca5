@@ -1,0 +1,11 @@
+
+t
+java:S2293@"YReplace the type specification in this constructor call with the diamond operator ("<>").(ý¯âŒûÿÿÿÿ
+
+java:S1488]"dImmediately return this expression instead of assigning it to the temporary variable "attrEntities".(›ÎíËøÿÿÿÿ
+u
+java:S1488r"_Immediately return this expression instead of assigning it to the temporary variable "collect".(˜‚ó×
+B
+java:S1602E",Remove useless curly braces around statement(’ì×š
+F
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ

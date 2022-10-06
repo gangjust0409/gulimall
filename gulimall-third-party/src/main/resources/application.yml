@@ -1,0 +1,20 @@
+server:
+  port: 3000
+
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    alicloud:
+      access-key: LTAI5t6sDt5HzTnTqWmvQrbn
+      secret-key: obwRzPB95OfnpB2bvPuAHo1mFbB2Kt
+      oss:
+        endpoint: oss-cn-guangzhou.aliyuncs.com
+        bucket: gulimall-buck-just
+  application:
+    name: gulimall-third-paty
+
+
+

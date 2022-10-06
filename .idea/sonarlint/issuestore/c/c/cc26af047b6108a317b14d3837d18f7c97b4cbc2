@@ -1,0 +1,14 @@
+
+c
+java:S1192\"HDefine a constant instead of duplicating this literal "attr_id" 7 times.(Œª×îüÿÿÿÿ
+a
+java:S1192W"KDefine a constant instead of duplicating this literal "catelog_id" 3 times.(ÛÃƒâ
+k	java:S117m"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±’›ãüÿÿÿÿ
+}
+java:S1488Ù"aImmediately return this expression instead of assigning it to the temporary variable "pageUtils".(³É¸—ûÿÿÿÿ
+B
+java:S1602[",Remove useless curly braces around statement(ß·Û•
+T
+java:S1155Ì">Use isEmpty() to check whether the collection is empty or not.(§×ëN
+H
+java:S1602Ò",Remove useless curly braces around statement(ªÀáúÿÿÿÿ
