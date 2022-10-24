@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="lqg-utils">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/gulimall-common/src/main/resources/lib/lqg-utils.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

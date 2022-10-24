@@ -1,7 +1,6 @@
 package cn.bdqn.gulimall.product.vo;
 
 import cn.bdqn.gulimall.product.entity.AttrEntity;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import java.util.List;

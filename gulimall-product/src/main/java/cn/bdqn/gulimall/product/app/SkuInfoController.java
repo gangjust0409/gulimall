@@ -8,6 +8,7 @@ import cn.bdqn.gulimall.product.vo.SpuSavevVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -30,7 +31,14 @@ public class SkuInfoController {
     @Autowired
     private SkuInfoService skuInfoService;
 
-    /**
+    // 查询价格
+    @GetMapping("{skuId}/getPrice")
+    public BigDecimal getNewPrice(@PathVariable Long skuId){
+        SkuInfoEntity infoEntity = skuInfoService.getById(skuId);
+        return infoEntity.getPrice();
+    }
+
+  /**
      * 列表
      */
     @RequestMapping("/list")

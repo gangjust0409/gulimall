@@ -1,8 +1,9 @@
 package cb.bdqn.gulinall.ware.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import cn.bdqn.gulimall.common.utils.PageUtils;
 import cb.bdqn.gulinall.ware.entity.WareInfoEntity;
+import cb.bdqn.gulinall.ware.vo.FareVo;
+import cn.bdqn.gulimall.common.utils.PageUtils;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.Map;
 
@@ -16,5 +17,7 @@ import java.util.Map;
 public interface WareInfoService extends IService<WareInfoEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    FareVo free(Long attrId);
 }
 

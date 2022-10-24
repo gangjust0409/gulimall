@@ -21,6 +21,16 @@ spring:
           filters:
             - RewritePath=/api/?(?<segment>.*),/$\{segment}
 
+        - id: coupon_route
+            # 匹配成功后跳转到哪
+          uri: lb://gulimall-coupon
+            # 设置断言
+          predicates:
+            - Path=/api/coupon/**
+              # 路径重写  http://localhost:88/api/**  http://localhost:80001/**
+          filters:
+              - RewritePath=/api/?(?<segment>.*),/$\{segment}
+
         - id: thridPaty-route
           uri: lb://gulimall-third-paty
           predicates:
@@ -63,6 +73,31 @@ spring:
           predicates:
             - Host=search.gulimall.mmf.asia
 
+        - id: gulimall_auth_route
+          uri: lb://gulimall-auth-server
+          predicates:
+            - Host=auth.gulimall.mmf.asia
+
+        - id: gulimall_cart_route
+          uri: lb://gulimall-cart
+          predicates:
+            - Host=cart.gulimall.mmf.asia
+
+        - id: gulimall_order_route
+          uri: lb://gulimall-order
+          predicates:
+            - Host=order.gulimall.mmf.asia
+
+        - id: gulimall_member_route
+          uri: lb://gulimall-member
+          predicates:
+            - Host=member.gulimall.mmf.asia
+
+
+        - id: gulimall_seckill_route
+          uri: lb://gulimall-seckill
+          predicates:
+            - Host=seckill.gulimall.mmf.asia
 
 
             # 注册进naocs

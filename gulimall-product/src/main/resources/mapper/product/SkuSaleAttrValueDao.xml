@@ -3,7 +3,7 @@
 
 <mapper namespace="cn.bdqn.gulimall.product.dao.SkuSaleAttrValueDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="cn.bdqn.gulimall.product.entity.SkuSaleAttrValueEntity" id="skuSaleAttrValueMap">
         <result property="id" column="id"/>
         <result property="skuId" column="sku_id"/>
@@ -32,6 +32,11 @@
         where si.spu_id = #{spuId}
         group by ssav.attr_id,ssav.attr_name,ssav.attr_value
 
+    </select>
+    <select id="getSkuAttr" resultType="java.lang.String">
+        select concat(attr_name,'：',attr_value)
+        from pms_sku_sale_attr_value
+        where sku_id = #{skuId}
     </select>
 
 

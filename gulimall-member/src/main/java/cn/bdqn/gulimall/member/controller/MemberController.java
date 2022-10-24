@@ -1,20 +1,22 @@
 package cn.bdqn.gulimall.member.controller;
 
+import cn.bdqn.gulimall.common.utils.PageUtils;
+import cn.bdqn.gulimall.common.utils.R;
+import cn.bdqn.gulimall.exection.BizExceptionCode;
+import cn.bdqn.gulimall.member.entity.MemberEntity;
+import cn.bdqn.gulimall.member.exception.PhoneExistsException;
+import cn.bdqn.gulimall.member.exception.UsernameExistsException;
+import cn.bdqn.gulimall.member.service.MemberService;
+import cn.bdqn.gulimall.member.vo.MemberLoginVo;
+import cn.bdqn.gulimall.member.vo.MemberRegistVo;
+import cn.bdqn.gulimall.member.vo.SocialUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Arrays;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import cn.bdqn.gulimall.member.entity.MemberEntity;
-import cn.bdqn.gulimall.member.service.MemberService;
-import cn.bdqn.gulimall.common.utils.PageUtils;
-import cn.bdqn.gulimall.common.utils.R;
 
 
 
@@ -40,6 +42,46 @@ public class MemberController {
         PageUtils page = memberService.queryPage(params);
 
         return R.ok().put("page", page);
+    }
+
+    @PostMapping("/auth/login")
+    public R oauthLogin(@RequestBody SocialUser user) throws Exception {
+        MemberEntity entity = memberService.login(user);
+
+        if (entity==null){
+            return R.error(BizExceptionCode.LOGIN_MEMBER_INVALID_EXCEPTION.getCode(), BizExceptionCode.LOGIN_MEMBER_INVALID_EXCEPTION.getMsg());
+        } else {
+            return R.ok().setData(entity);
+        }
+    }
+
+
+    // 登录
+    @PostMapping("/login")
+    public R login(@RequestBody MemberLoginVo vo){
+
+        MemberEntity entity = memberService.login(vo);
+        if (entity==null){
+            return R.error(BizExceptionCode.LOGIN_MEMBER_INVALID_EXCEPTION.getCode(), BizExceptionCode.LOGIN_MEMBER_INVALID_EXCEPTION.getMsg());
+        } else {
+            return R.ok().setData(entity);
+        }
+    }
+
+    // 注册
+    @PostMapping("/regist")
+    public R regist(@RequestBody MemberRegistVo vo){
+
+        try{
+            memberService.regist(vo);
+        } catch (UsernameExistsException e) {
+            // 要判断是什么类型的异常
+            return R.error(BizExceptionCode.USERNAME_EXISTS_EXCEPTION.getCode(),BizExceptionCode.USERNAME_EXISTS_EXCEPTION.getMsg());
+        } catch (PhoneExistsException e) {
+            return R.error(BizExceptionCode.PHONE_EXISTS_EXCEPTION.getCode(), BizExceptionCode.PHONE_EXISTS_EXCEPTION.getMsg());
+        }
+
+        return R.ok();
     }
 
 

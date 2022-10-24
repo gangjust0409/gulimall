@@ -1,6 +1,5 @@
 package cn.bdqn.gulimall.product.service;
 
-import cn.bdqn.gulimall.product.vo.BaseAttrs;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.bdqn.gulimall.common.utils.PageUtils;
 import cn.bdqn.gulimall.product.entity.ProductAttrValueEntity;

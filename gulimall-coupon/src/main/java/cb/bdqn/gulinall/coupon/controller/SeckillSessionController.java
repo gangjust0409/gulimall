@@ -1,20 +1,17 @@
 package cb.bdqn.gulinall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-//import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import cb.bdqn.gulinall.coupon.entity.SeckillSessionEntity;
 import cb.bdqn.gulinall.coupon.service.SeckillSessionService;
 import cn.bdqn.gulimall.common.utils.PageUtils;
 import cn.bdqn.gulimall.common.utils.R;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 
 
 
@@ -30,6 +27,14 @@ import cn.bdqn.gulimall.common.utils.R;
 public class SeckillSessionController {
     @Autowired
     private SeckillSessionService seckillSessionService;
+
+    // 获取3天的活动
+    @GetMapping("/letes3DaySession")
+    public R getLetes3DaySession() {
+        List<SeckillSessionEntity> sessions = seckillSessionService.getLetes3DaySession();
+
+        return R.ok().setData(sessions);
+    }
 
     /**
      * 列表

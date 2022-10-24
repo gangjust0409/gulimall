@@ -1,20 +1,17 @@
 package cb.bdqn.gulinall.ware.controller;
 
+import cb.bdqn.gulinall.ware.entity.WareInfoEntity;
+import cb.bdqn.gulinall.ware.service.WareInfoService;
+import cb.bdqn.gulinall.ware.vo.FareVo;
+import cn.bdqn.gulimall.common.utils.PageUtils;
+import cn.bdqn.gulimall.common.utils.R;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Arrays;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import cb.bdqn.gulinall.ware.entity.WareInfoEntity;
-import cb.bdqn.gulinall.ware.service.WareInfoService;
-import cn.bdqn.gulimall.common.utils.PageUtils;
-import cn.bdqn.gulimall.common.utils.R;
 
 
 
@@ -31,7 +28,14 @@ public class WareInfoController {
     @Autowired
     private WareInfoService wareInfoService;
 
-    /**
+    // 计算运费
+    @GetMapping("/free")
+    public R jisuanFree(@RequestParam("attrId") Long attrId) {
+        FareVo free = wareInfoService.free(attrId);
+        return R.ok().setData(free);
+    }
+
+  /**
      * 列表
      */
     @RequestMapping("/list")

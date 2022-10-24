@@ -1,6 +1,7 @@
 package cn.bdqn.gulimall.product.feign;
 
 import cn.bdqn.gulimall.common.utils.R;
+import cn.bdqn.gulimall.product.feign.fallback.CouponFeignFallback;
 import cn.bdqn.gulimall.to.SkuCouponTo;
 import cn.bdqn.gulimall.to.SkuReductioinTo;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @date 2022/5/3
  */
 @Component
-@FeignClient("gulimall-coupon")
+@FeignClient(value = "gulimall-coupon",fallback = CouponFeignFallback.class)
 public interface CouponFeignService {
 
     /**

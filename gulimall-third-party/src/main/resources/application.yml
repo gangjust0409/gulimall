@@ -1,5 +1,5 @@
 server:
-  port: 3000
+  port: 30000
 
 
 spring:
@@ -13,6 +13,14 @@ spring:
       oss:
         endpoint: oss-cn-guangzhou.aliyuncs.com
         bucket: gulimall-buck-just
+      host: https://dfsns.market.alicloudapi.com
+      path: /data/send_sms
+      method: POST
+      appcode: 0c9de66de3a84416b9400a9dbdddb202
+
+      # 短信二
+      url: https://smssend.shumaidata.com/sms/send
+
   application:
     name: gulimall-third-paty
 

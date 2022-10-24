@@ -1,20 +1,17 @@
 package cn.bdqn.gulimall.product.app;
 
+import cn.bdqn.gulimall.common.utils.PageUtils;
+import cn.bdqn.gulimall.common.utils.R;
+import cn.bdqn.gulimall.product.entity.SkuSaleAttrValueEntity;
+import cn.bdqn.gulimall.product.service.SkuSaleAttrValueService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import cn.bdqn.gulimall.product.entity.SkuSaleAttrValueEntity;
-import cn.bdqn.gulimall.product.service.SkuSaleAttrValueService;
-import cn.bdqn.gulimall.common.utils.PageUtils;
-import cn.bdqn.gulimall.common.utils.R;
 
 
 
@@ -30,6 +27,12 @@ import cn.bdqn.gulimall.common.utils.R;
 public class SkuSaleAttrValueController {
     @Autowired
     private SkuSaleAttrValueService skuSaleAttrValueService;
+
+    @GetMapping("/sku/attr/{skuId}")
+    public List<String> getSkuAttr(@PathVariable Long skuId) {
+
+        return skuSaleAttrValueService.getSkuAttr(skuId);
+    }
 
     /**
      * 列表

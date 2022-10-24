@@ -14,11 +14,13 @@ import cn.bdqn.gulimall.product.vo.*;
 import cn.bdqn.gulimall.to.SkuCouponTo;
 import cn.bdqn.gulimall.to.SkuReductioinTo;
 import cn.bdqn.gulimall.to.es.SkuEsModule;
+import cn.bdqn.gulimall.vo.OrderSpuInfoVo;
 import cn.bdqn.gulimall.vo.SkuStockVo;
 import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +87,7 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         return new PageUtils(page);
     }
 
+    @GlobalTransactional // 后台管理系统使用与at模式
     @Transactional(rollbackFor = SQLException.class)
     @Override
     public void saveSpuInfo(SpuSavevVo vo) {
@@ -317,7 +320,6 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
             }
             // 热度评分。
             skuEsModule.setHotScore(0L);
-            System.out.println("es 墓库：" + skuEsModule);
             return skuEsModule;
         }).collect(Collectors.toList());
 
@@ -331,6 +333,18 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
             // TODD 调用失败  重复调用  接口幂等性
         }
 
+    }
+
+    @Override
+    public OrderSpuInfoVo getSpuInfoBySkuId(Long skuId) {
+        OrderSpuInfoVo spuInfoVo = new OrderSpuInfoVo();
+        // 根据skuid获取spuid
+        SkuInfoEntity skuInfoEntity = skuInfoService.getById(skuId);
+        SpuInfoEntity spuInfoEntity = getById(skuInfoEntity.getSpuId());
+        BrandEntity brandEntity = brandService.getById(spuInfoEntity.getBrandId());
+        BeanUtils.copyProperties(spuInfoEntity, spuInfoVo);
+        spuInfoVo.setBrandName(brandEntity.getName());
+        return spuInfoVo;
     }
 
 

@@ -13,6 +13,11 @@ spring:
       discovery:
         server-addr: localhost:8848
 
+  redis:
+    host: 192.168.50.124
+    port: 6379
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
@@ -23,9 +28,13 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-
-
-
+feign:
+  client:
+    config:
+      default:
+        #不设置connectTimeout会导致readTimeout设置不生效
+        connectTimeout: 3000
+        readTimeout: 6000
 
 
 
@@ -34,3 +43,12 @@ mybatis-plus:
 #  level:
 #    cn.bdqn.gulimall.product.dao: debug
 # oss 存储
+
+# 配置支付信息
+alipay:
+  app-id: 2021000120616698
+  merchant-private-key: MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCcKgsBZrd7FBzy6iHcGK4lP9hm9Zsrpk+jm/kBsyDxyBcyRLplSOLJ5m2DZXjKILf5clxn/MWV53a8VlRCW1wlgTbVFva2b/iGyiV1q4ALq+zB2OxxFRuiExXrYGewkid84GFPei4XVmke2oHivR6vW4KVqlMnha7WK9WsizguJY9nIYG7gE18iDMLYqNUwYyD6Zr9JW32pLLS4NrXnriEfW4wVkaRX+7rsxtR3i5oKCI2S2faE6Bhn2JLe/q1XBaB0TabToC+dkksYi7Hlmzta7+b1z9H3qnm1JJg6rjQOLuRix/McKtONIIkT9zuVCxaa6ioBqMZ4Lj0MbAiNu7bAgMBAAECggEAfiPzudEHehJYA9sdOJRy7kGxAhF3on13LLfLHhVcEhDGs+MSEMgb8GwBn7YyKErfcE1w2Mozq49IuH6fFu6G8wB5kww2gkzVmcLlGTRLfKIF3triucEMDhGOjg7UEqsr3FG+KJ2PZ2h0BukHK2gJximLxGrNOkpgXD0SHoph+ds4AyLI2haIcFy/ArAjTQ/ljDpwdBH214ZWdb8tlbfOO6P6XI4Fem5BfRDSGuGKGCTHxL495in2A9Jqn1DasMq6XD6hJAu+v9uhOdt2/DyaCqPcRUAuhssL51IBZxf6XCz6pSF0xwzFqCxZ4dvYiQo1oT8+88OEEz0o53v2gD5ccQKBgQDI3TwW8j37mEQW37S6EgtC/Ebs62Wgggv+oiRHT5eRrJYV8MQVBfqdQnRRJsiPsUjk+2kBA7wP42uPhT6pLKizuN164CW6PWrv6ULe+JpaKlRVyZtJbbBQdSAqOKHX5VfGCcf0E6tJrzpskpdXCBs7iXH9c7beIIRmRhBYzdKYswKBgQDHB7up6QeAr0harEpVnlPzSP2lPcTMaw8lTXMHnlgJsLAkeh9sDWWPqT5oJ6wIQV+2Cy/+/Qe8m4GRjG2thl9jxsalYYaWt57yJx+s2njVk54W/aJzD0RnGVy8zN+7wyKn+w9wVOMNHP8dBTgCzWzLD1hOnY3IC8tJpfy2vKLVOQKBgFU3ZvLlOt6urtR1fBsk5Jo6pWyGQcti4OvapkGKxucKrXIJf2bb7oMhWm/DYHt131MmRloj13l2Jn/xK7BiPgBhgbVLuzXUMLYv5Crsla+DHdx3d+YjHxZDWq4O8LrDlgVyyN4IKjdMnCDL4GEQE12i5jV9DiwW55TsTKsgRyR5AoGAWjJC9alJYSQOYikaNtrdqK83Y58uhIUwA/OpYZZ8x0dvS9icTNd1YzmLsp/n8oXN3i4Lvj7lNrAyc8d0HON8bzcx5tjfqYXlXlAkpq0LfZ68Uib3a7VLhn2T7WvbKLgyCHZadMnDa7nsUzZ+P6bg2tVFa7sy+al+ow26DQZHtOECgYBNOBiRVTKQCvEmIZpJtpC+UGaWYl8nktrM4DMpiiBKElxWwwwglcr02AxtBkfD8rFyA9v3eqEikW43eejfaKIbNpVBvw4COhmhtysUkfgX9wr5qqenoxyeZLKrEpJhs+qoFd/pvj/JlNgvjbGsTLvkeMcFnMbwpeOrD4vzrkyhog==
+  alipay-public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAthCPT8piE2gZIymexv6jVRdUMB9p8zvY3uff1mbgt0tnagF/AValf5niLnN/uH0tyJTPNEkleETRIwzdSkXQ104675FK0X0jDOBGXLQ/UTTXuWpfje4opqRE0ngaEnj2lspNPGT6Eue5INSPsKOrowGl9/T6dx0Z4srAFAyqqLGcNKGmHOnhnvVDNiANeCdmr1JCayi0szf8bJzeKesTfp9dnuLgtkBkOo1eo6bX/uloYwbPEyvNLCXwP/w7Z5ncsjR0DlQQaWyId3mxhKHj3n/crT0rBkhGFGOu/O8kU4elKH/qt3HKYHqnk2nVA5q/4LaXdDr10ruCpKL3ds1bjwIDAQAB
+  gateway-url: https://openapi.alipaydev.com/gateway.do
+  return-url: http://member.gulimall.mmf.asia//member-list.html
+  # 支付宝支付成功之后的回调，如果有异常，那么会隔几秒发一次

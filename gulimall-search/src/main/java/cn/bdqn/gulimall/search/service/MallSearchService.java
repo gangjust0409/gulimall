@@ -1,7 +1,7 @@
 package cn.bdqn.gulimall.search.service;
 
-import vo.SearchParam;
-import vo.SearchResult;
+import cn.bdqn.gulimall.search.vo.SearchParam;
+import cn.bdqn.gulimall.search.vo.SearchResult;
 
 public interface MallSearchService {
 

@@ -16,7 +16,7 @@ public class MyRedissonConfig {
     RedissonClient redisson() throws IOException {
         Config config = new Config();
         // java.lang.IllegalArgumentException: Redis url should start with redis:// or rediss:// (for SSL connection)
-        config.useSingleServer().setAddress("redis://192.168.85.130:6379");
+        config.useSingleServer().setAddress("redis://192.168.50.124:6379");
         RedissonClient redissonClient = Redisson.create(config);
         return redissonClient;
     }

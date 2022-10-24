@@ -243,6 +243,10 @@
 					<groupId>javax.validation</groupId>
 					<artifactId>validation-api</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>com.alibaba.cloud</groupId>
+					<artifactId>spring-cloud-alibaba-seata</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 

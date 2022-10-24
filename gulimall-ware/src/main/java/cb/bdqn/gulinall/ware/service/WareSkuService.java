@@ -1,9 +1,12 @@
 package cb.bdqn.gulinall.ware.service;
 
+import cb.bdqn.gulinall.ware.entity.WareSkuEntity;
+import cb.bdqn.gulinall.ware.vo.OrderWareVo;
+import cn.bdqn.gulimall.common.utils.PageUtils;
+import cn.bdqn.gulimall.to.mq.OrderTo;
+import cn.bdqn.gulimall.to.mq.WareLockSkuTo;
 import cn.bdqn.gulimall.vo.SkuStockVo;
 import com.baomidou.mybatisplus.extension.service.IService;
-import cn.bdqn.gulimall.common.utils.PageUtils;
-import cb.bdqn.gulinall.ware.entity.WareSkuEntity;
 
 import java.util.List;
 import java.util.Map;
@@ -27,5 +30,11 @@ public interface WareSkuService extends IService<WareSkuEntity> {
      * @return
      */
     List<SkuStockVo> getSkuHasStock(List<Long> skuIds);
+
+    Boolean orderLock(OrderWareVo vo);
+
+    void unLockStock(WareLockSkuTo to);
+
+    void unLockStock(OrderTo order);
 }
 

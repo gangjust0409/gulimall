@@ -1,9 +1,12 @@
 package cb.bdqn.gulinall.ware.controller;
 
 import cb.bdqn.gulinall.ware.entity.WareSkuEntity;
+import cb.bdqn.gulinall.ware.exception.NoHasStockException;
 import cb.bdqn.gulinall.ware.service.WareSkuService;
+import cb.bdqn.gulinall.ware.vo.OrderWareVo;
 import cn.bdqn.gulimall.common.utils.PageUtils;
 import cn.bdqn.gulimall.common.utils.R;
+import cn.bdqn.gulimall.exection.BizExceptionCode;
 import cn.bdqn.gulimall.vo.SkuStockVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +31,18 @@ import java.util.Map;
 public class WareSkuController {
     @Autowired
     private WareSkuService wareSkuService;
+
+    // 锁库存
+    @PostMapping("/lock/order")
+    public R orderLock(@RequestBody OrderWareVo vo) {
+        try{
+            Boolean lock = wareSkuService.orderLock(vo);
+            return R.ok().setData(lock);
+        } catch (NoHasStockException e) {
+            // 无库存处理
+            return R.error(BizExceptionCode.NO_HAS_STOCK_WARE.getCode(),BizExceptionCode.NO_HAS_STOCK_WARE.getMsg());
+        }
+    }
 
     // 远程传给sku
     @PostMapping("/hasstock")

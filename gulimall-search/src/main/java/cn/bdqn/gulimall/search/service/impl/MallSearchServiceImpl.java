@@ -34,9 +34,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.yaml.snakeyaml.util.UriEncoder;
-import vo.AttrResponseVo;
-import vo.SearchParam;
-import vo.SearchResult;
+import cn.bdqn.gulimall.search.vo.AttrResponseVo;
+import cn.bdqn.gulimall.search.vo.SearchParam;
+import cn.bdqn.gulimall.search.vo.SearchResult;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -261,7 +261,7 @@ public class MallSearchServiceImpl implements MallSearchService {
             // 品牌图片
             ParsedStringTerms brandImgAgg = bucket.getAggregations().get("brand_img_agg");
             String brandImg = brandImgAgg.getBuckets().get(0).getKeyAsString();
-            // 封装 vo
+            // 封装 cn.bdqn.gulimall.search.cn.bdqn.gulimall.product.vo
             SearchResult.BrandVo brandVo = new SearchResult.BrandVo();
             brandVo.setBrandId(brandId);
             brandVo.setBrandName(brandName);
@@ -280,7 +280,7 @@ public class MallSearchServiceImpl implements MallSearchService {
             // 分类名称
             ParsedStringTerms catalogNameAgg = bucket.getAggregations().get("catalog_name_agg");
             String catalogName = catalogNameAgg.getBuckets().get(0).getKeyAsString();
-            // 封装 vo
+            // 封装 cn.bdqn.gulimall.search.cn.bdqn.gulimall.product.vo
             SearchResult.CatalogVo catalogVo = new SearchResult.CatalogVo();
             catalogVo.setCatalogId(catalogId);
             catalogVo.setCatalogName(catalogName);
@@ -302,7 +302,7 @@ public class MallSearchServiceImpl implements MallSearchService {
             // 属性值
             ParsedStringTerms attrValueAgg = bucket.getAggregations().get("attr_value_agg");
             List<String> attrValues = attrValueAgg.getBuckets().stream().map(item -> ((Terms.Bucket) item).getKeyAsString()).collect(Collectors.toList());
-            // 封装 vo
+            // 封装 cn.bdqn.gulimall.search.cn.bdqn.gulimall.product.vo
             SearchResult.AttrVo attrVo = new SearchResult.AttrVo();
             attrVo.setAttrId(attrId);
             attrVo.setAttrName(attrName);

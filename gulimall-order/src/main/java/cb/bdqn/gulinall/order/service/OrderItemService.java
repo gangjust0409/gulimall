@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import cn.bdqn.gulimall.common.utils.PageUtils;
 import cb.bdqn.gulinall.order.entity.OrderItemEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +17,7 @@ import java.util.Map;
 public interface OrderItemService extends IService<OrderItemEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    void insertBatch(List<OrderItemEntity> orderItems);
 }
 

@@ -3,6 +3,7 @@ package cn.bdqn.gulimall.product.service;
 import cn.bdqn.gulimall.common.utils.PageUtils;
 import cn.bdqn.gulimall.product.entity.SpuInfoEntity;
 import cn.bdqn.gulimall.product.vo.SpuSavevVo;
+import cn.bdqn.gulimall.vo.OrderSpuInfoVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.Map;
@@ -29,5 +30,6 @@ public interface SpuInfoService extends IService<SpuInfoEntity> {
      */
     void up(Long spuId);
 
+    OrderSpuInfoVo getSpuInfoBySkuId(Long skuId);
 }
 

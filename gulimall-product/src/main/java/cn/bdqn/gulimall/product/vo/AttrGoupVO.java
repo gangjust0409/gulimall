@@ -1,7 +1,6 @@
 package cn.bdqn.gulimall.product.vo;
 
 import lombok.Data;
-import org.w3c.dom.Attr;
 
 /**
  * @author 刚

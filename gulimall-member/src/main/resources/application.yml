@@ -1,5 +1,8 @@
 server:
   port: 8000
+  servlet:
+    session:
+      timeout: 30m
 spring:
   application:
     name: gulimall-member
@@ -12,6 +15,13 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
+  session:
+    store-type: redis
+  redis:
+    host: 192.168.50.124
+    port: 6379
+  thymeleaf:
+    cache: false
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
@@ -23,8 +33,10 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-
-
+# 指定 spring session 存储类型
+#spring.session.store-type=redis
+  # 超时时间 默认 30 分钟
+#  server.servlet.session.timeout=30m
 
 
 

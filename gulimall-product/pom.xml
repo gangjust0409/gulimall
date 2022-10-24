@@ -56,6 +56,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency><!--能在sentinel控制台显示监控结果 每个微服务的标注-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
 		<!--热部署-->
@@ -66,7 +70,7 @@
 		</dependency>-->
 
 		<!--引入 redis-->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 			<exclusions>
@@ -75,7 +79,7 @@
 					<artifactId>lettuce-core</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
+		</dependency>-->
 
 		<!--使用jedis-->
 		<dependency>
@@ -91,19 +95,13 @@
 			<version>3.12.0</version>
 		</dependency>
 
-
-		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-pool2 -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-pool2</artifactId>
-			<version>2.11.1</version>
-		</dependency>
-
 		<!--spring cache-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
+
+
 
 	</dependencies>
 

@@ -1,17 +1,23 @@
 package cn.bdqn.gulimall.product.service.impl;
 
+import cn.bdqn.gulimall.common.utils.PageUtils;
+import cn.bdqn.gulimall.common.utils.Query;
+import cn.bdqn.gulimall.product.dao.CategoryDao;
+import cn.bdqn.gulimall.product.entity.CategoryEntity;
 import cn.bdqn.gulimall.product.service.CategoryBrandRelationService;
+import cn.bdqn.gulimall.product.service.CategoryService;
 import cn.bdqn.gulimall.product.vo.Catelog2Vo;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mysql.cj.util.StringUtils;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Service;
@@ -19,16 +25,6 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.bdqn.gulimall.common.utils.PageUtils;
-import cn.bdqn.gulimall.common.utils.Query;
-
-import cn.bdqn.gulimall.product.dao.CategoryDao;
-import cn.bdqn.gulimall.product.entity.CategoryEntity;
-import cn.bdqn.gulimall.product.service.CategoryService;
 
 
 @Service("categoryService")
@@ -161,7 +157,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
             List<Catelog2Vo> parent_cid = null;
             if (categoryL2s != null) {
                 parent_cid = categoryL2s.stream().map(l2 -> {
-                    // 封装 vo
+                    // 封装 cn.bdqn.gulimall.search.cn.bdqn.gulimall.product.vo
                     Catelog2Vo catelog2Vo = new Catelog2Vo(v.getCatId().toString(), null, l2.getCatId().toString(), l2.getName());
                     // 在查询三级分类数据
                     List<CategoryEntity> categoryL3s = getParent_cid(selectList, l2.getCatId());
@@ -290,7 +286,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
             List<Catelog2Vo> parent_cid = null;
             if (categoryL2s != null) {
                 parent_cid = categoryL2s.stream().map(l2 -> {
-                    // 封装 vo
+                    // 封装 cn.bdqn.gulimall.search.cn.bdqn.gulimall.product.vo
                     Catelog2Vo catelog2Vo = new Catelog2Vo(v.getCatId().toString(), null, l2.getCatId().toString(), l2.getName());
                     // 在查询三级分类数据
                     List<CategoryEntity> categoryL3s = getParent_cid(selectList, l2.getCatId());

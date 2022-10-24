@@ -5,6 +5,7 @@ import cn.bdqn.gulimall.common.utils.R;
 import cn.bdqn.gulimall.product.entity.SpuInfoEntity;
 import cn.bdqn.gulimall.product.service.SpuInfoService;
 import cn.bdqn.gulimall.product.vo.SpuSavevVo;
+import cn.bdqn.gulimall.vo.OrderSpuInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,14 @@ import java.util.Map;
 public class SpuInfoController {
     @Autowired
     private SpuInfoService spuInfoService;
+
+    // skuid获取spu信息
+    @GetMapping("/spuInfo/{id}")
+    public R spuInfoBySkuId(@PathVariable("id") Long skuId){
+        OrderSpuInfoVo spuInfo = spuInfoService.getSpuInfoBySkuId(skuId);
+
+        return R.ok().setData(spuInfo);
+    }
 
     // 16/up 上架商品
     @PostMapping("/{spuId}/up")

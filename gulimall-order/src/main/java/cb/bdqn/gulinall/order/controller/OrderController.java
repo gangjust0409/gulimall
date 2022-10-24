@@ -1,20 +1,16 @@
 package cb.bdqn.gulinall.order.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-//import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import cb.bdqn.gulinall.order.entity.OrderEntity;
 import cb.bdqn.gulinall.order.service.OrderService;
 import cn.bdqn.gulimall.common.utils.PageUtils;
 import cn.bdqn.gulimall.common.utils.R;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Map;
+
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 
 
 
@@ -31,6 +27,13 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    // 支付请求
+    @GetMapping("/order/state/{orderSn}")
+    public R orderByOrderSn(@PathVariable String orderSn){
+        OrderEntity order = orderService.getOrderState(orderSn);
+        return R.ok().setData(order);
+    }
+
     /**
      * 列表
      */
@@ -40,6 +43,13 @@ public class OrderController {
         PageUtils page = orderService.queryPage(params);
 
         return R.ok().put("page", page);
+    }
+
+    // 查询订单信息
+    @PostMapping("/orderWithMember")
+    public R queryOrders(@RequestBody Map<String, Object> params){
+        PageUtils page = orderService.queryOrders(params);
+        return R.ok().setData(page);
     }
 
 

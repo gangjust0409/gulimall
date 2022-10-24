@@ -1,6 +1,7 @@
 package cn.bdqn.gulimall.product.feign;
 
 import cn.bdqn.gulimall.common.utils.R;
+import cn.bdqn.gulimall.product.feign.fallback.SearchFeignFallback;
 import cn.bdqn.gulimall.to.es.SkuEsModule;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient("gulimall-search")
+@FeignClient(value = "gulimall-search",fallback = SearchFeignFallback.class)
 @Component
 public interface SearchFeignService {
 

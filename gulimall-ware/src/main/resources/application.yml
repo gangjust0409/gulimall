@@ -12,8 +12,17 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
+  redis:
+    host: 192.168.50.124
+    port: 6379
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
+  rabbitmq:
+    host: 192.168.50.124
+    virtual-host: /
+    listener:
+      simple:
+        acknowledge-mode: manual
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
@@ -26,8 +35,13 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 
-
-
+feign:
+  client:
+    config:
+      default:
+        #不设置connectTimeout会导致readTimeout设置不生效
+        connectTimeout: 3000
+        readTimeout: 6000
 
 
 

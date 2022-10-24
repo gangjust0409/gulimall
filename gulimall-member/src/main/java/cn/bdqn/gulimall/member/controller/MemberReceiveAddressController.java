@@ -1,20 +1,17 @@
 package cn.bdqn.gulimall.member.controller;
 
+import cn.bdqn.gulimall.common.utils.PageUtils;
+import cn.bdqn.gulimall.common.utils.R;
+import cn.bdqn.gulimall.member.entity.MemberReceiveAddressEntity;
+import cn.bdqn.gulimall.member.service.MemberReceiveAddressService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import cn.bdqn.gulimall.member.entity.MemberReceiveAddressEntity;
-import cn.bdqn.gulimall.member.service.MemberReceiveAddressService;
-import cn.bdqn.gulimall.common.utils.PageUtils;
-import cn.bdqn.gulimall.common.utils.R;
 
 
 
@@ -31,7 +28,13 @@ public class MemberReceiveAddressController {
     @Autowired
     private MemberReceiveAddressService memberReceiveAddressService;
 
-    /**
+    // hu获取当前会员的地址信息
+    @GetMapping("/{memberid}/address")
+    public List<MemberReceiveAddressEntity> addressEntities(@PathVariable Long memberid){
+        return memberReceiveAddressService.getCurrentAddress(memberid);
+    }
+
+  /**
      * 列表
      */
     @RequestMapping("/list")

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="utf-8" />
@@ -5005,29 +5005,38 @@ Cookie</span>是由网页服务器存放在您的访问设备上的文本文件�
 			<div class="desc">欢迎注册</div>
 			<div class="dfg">
 				<span>已有账号？</span>
-				<a href="">请登录</a>
+				<a href="http://auth.gulimall.mmf.asia/login.html">请登录</a>
 			</div>
 		</header>
 		<section>
-			<form action="" class="one">
+			<form action="/regist" method="post" class="one">
+				<div class="tips"
+					 style="color: #c00000;"
+					 th:text="${errors!=null?(#maps.containsKey(errors,'msg')?errors.msg:''):''}">
+
+				</div>
 				<div class="register-box">
-					<label for="username" class="username_label">用 户 名
-			<input maxlength="20" type="text" placeholder="您的用户名和登录名" >
+					<label  class="username_label">用 户 名
+			<input maxlength="20" name="userName" type="text" placeholder="您的用户名和登录名" >
 					</label>
-					<div class="tips">
+					<div class="tips"
+						 style="color: #c00000;"
+						 th:text="${errors!=null?(#maps.containsKey(errors,'userName')?errors.userName:''):''}">
 
 					</div>
 				</div>
 				<div class="register-box">
-					<label for="username" class="other_label">设 置 密 码
-			<input maxlength="20" type="password" placeholder="建议至少使用两种字符组合">
+					<label class="other_label">设 置 密 码
+			<input maxlength="20" type="password" name="password" placeholder="建议至少使用两种字符组合">
 			</label>
-					<div class="tips">
+					<div class="tips"
+						 style="color: #c00000;"
+						 th:text="${errors!=null?(#maps.containsKey(errors,'password')?errors.password:''):''}">
 
 					</div>
 				</div>
 				<div class="register-box">
-					<label for="username" class="other_label">确 认 密 码
+					<label class="other_label">确 认 密 码
 			<input maxlength="20" type="password" placeholder="请再次输入密码">
 			</label>
 					<div class="tips">
@@ -5035,22 +5044,26 @@ Cookie</span>是由网页服务器存放在您的访问设备上的文本文件�
 					</div>
 				</div>
 				<div class="register-box">
-					<label for="username" class="other_label">
+					<label class="other_label">
 			<span>中国 0086∨</span>
-			<input class="phone" maxlength="20" type="text" placeholder="建议使用常用手机">
+			<input class="phone" id="phone" maxlength="20" name="phone" type="text" placeholder="建议使用常用手机">
 			</label>
-					<div class="tips">
+					<div class="tips"
+						 style="color: #c00000;"
+						 th:text="${errors!=null?(#maps.containsKey(errors,'phone')?errors.phone:''):''}">
 
 					</div>
 				</div>
 				<div class="register-box">
-					<label for="username" class="other_label">验 证 码
-			<input maxlength="20" type="text" placeholder="请输入验证码" class="caa">
+					<label class="other_label">验 证 码
+			<input maxlength="20" type="text" name="code" placeholder="请输入验证码" class="caa">
 			</label>
-					<span id="code"></span>
-					<div class="tips">
+					<div class="tips"
+						 style="color: #c00000;"
+						 th:text="${errors!=null?(#maps.containsKey(errors,'code')?errors.code:''):''}">
 
 					</div>
+					<a id="send_code">发送验证码</a>
 				</div>
 				<div class="arguement">
 					<input type="checkbox" id="xieyi"> 阅读并同意
@@ -5245,7 +5258,7 @@ Cookie</span>是由网页服务器存放在您的访问设备上的文本文件�
 						}
 					})
 					//	提交按钮
-				$("#submit_btn").click(function(e) {
+				/*$("#submit_btn").click(function(e) {
 					for(var j = 0; j < 5; j++) {
 						if($('input').eq(j).val().length == 0) {
 							$('input').eq(j).focus();
@@ -5275,7 +5288,7 @@ Cookie</span>是由网页服务器存放在您的访问设备上的文本文件�
 						e.preventDefault();
 						return;
 					}
-				})
+				})*/
 
 				//  建立构造函数，构造学生信息模板
 				function Student(name, password, tel, id) {
@@ -5302,6 +5315,40 @@ Cookie</span>是由网页服务器存放在您的访问设备上的文本文件�
 			$(".cuo").click(function() {
 				$(".zong").hide();
 			});
+
+			$("#send_code").click(function () {
+				// 点击倒计时时，时间变快
+				if ($(this).hasClass("disabled")) {
+					// 倒计时中
+				} else {
+					// 发送请求验证码
+					$.get("/sms/sendcode?phone=" + $("#phone").val(),function (data) {
+						if (data.code != 0) {
+							alert(data.msg)
+						}
+					});
+					// 倒计时
+					timeoutChange()
+				}
+			})
+
+			var num = 60;
+			function timeoutChange() {
+				// 点击 更换 文本
+				if (num == 0) {
+					$("#send_code").attr("class","")
+					$("#send_code").text("重新发送");
+					num=60
+				} else {
+					$("#send_code").attr("class","disabled")
+					setTimeout("timeoutChange()",1000)
+					var s = num + "s后再发送";
+					$("#send_code").text(s);
+				}
+				num--;
+
+			}
+
 		</script>
 	</body>
 

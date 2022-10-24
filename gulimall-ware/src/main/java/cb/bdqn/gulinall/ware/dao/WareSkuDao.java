@@ -1,7 +1,6 @@
 package cb.bdqn.gulinall.ware.dao;
 
 import cb.bdqn.gulinall.ware.entity.WareSkuEntity;
-import cn.bdqn.gulimall.vo.SkuStockVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,4 +20,10 @@ public interface WareSkuDao extends BaseMapper<WareSkuEntity> {
     void addStock(@Param("skuId") Long skuId, @Param("wareId") Long wareId, @Param("skuNum") Integer skuNum);
 
     Long getSkuHasStock(Long skuId);
+
+    List<Long> listWareIds(@Param("skuId") Long skuId);
+
+    Long lockWare(@Param("skuId") Long skuId, @Param("wareId") Long wareId, @Param("num") Integer num);
+
+    void unlock(@Param("skuId") Long skuId, @Param("wareId") Long wareId, @Param("num") Integer num);
 }

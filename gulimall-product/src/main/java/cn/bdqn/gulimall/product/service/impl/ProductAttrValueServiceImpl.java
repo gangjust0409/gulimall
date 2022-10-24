@@ -1,22 +1,19 @@
 package cn.bdqn.gulimall.product.service.impl;
 
-import cn.bdqn.gulimall.product.vo.BaseAttrs;
+import cn.bdqn.gulimall.common.utils.PageUtils;
+import cn.bdqn.gulimall.common.utils.Query;
+import cn.bdqn.gulimall.product.dao.ProductAttrValueDao;
+import cn.bdqn.gulimall.product.entity.ProductAttrValueEntity;
+import cn.bdqn.gulimall.product.service.ProductAttrValueService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.bdqn.gulimall.common.utils.PageUtils;
-import cn.bdqn.gulimall.common.utils.Query;
-
-import cn.bdqn.gulimall.product.dao.ProductAttrValueDao;
-import cn.bdqn.gulimall.product.entity.ProductAttrValueEntity;
-import cn.bdqn.gulimall.product.service.ProductAttrValueService;
-import org.springframework.transaction.annotation.Transactional;
 
 
 @Service("productAttrValueService")
