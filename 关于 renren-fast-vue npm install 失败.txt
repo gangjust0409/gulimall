@@ -1,4 +1,4 @@
-不管咋地都要 安装 cnpm
+安装 cnpm
 
 node 版本  v16.17.0
 然后在主目录下 cnpm install 
